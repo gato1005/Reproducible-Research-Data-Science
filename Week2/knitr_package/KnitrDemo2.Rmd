@@ -1,0 +1,63 @@
+# My second Knitr Document
+Atharva Ramgirkar
+
+## Introduction
+
+This is some text (i.e. a "text chunk"). Here is a code chunk.
+
+```{r simulation,echo=FALSE}
+set.seed(1)
+x<-rnorm(100)
+mean(x)
+```
+
+You will never know the result of the next code ;)
+
+```{r simulation_two,echo=TRUE,results='hide'}
+set.seed(1)
+x<-rnorm(100)
+mean(x)
+```
+
+```{r computetime,echo=FALSE}
+time<- format(Sys.time(), "%a %b %d %X %Y")
+rand<- rnorm(1)
+```
+
+The current time is `r time`. My favorite number is `r rand`.
+
+======================================
+
+Let's simulate some data
+
+```{r simdata,echo=TRUE}
+x<- rnorm(100)
+y<-x+rnorm(100,sd=0.5)
+```
+
+Here is a scatter plot of the data.
+
+```{r scatterplot,fig.height=4}
+par(mar=c(5,4,1,1),las=1)
+plot(x,y,main = "My Simulated Data")
+```
+
+==========================================
+
+## Introduction
+
+```{r fitmodel}
+library(datasets)
+data("airquality")
+fit<-lm(Ozone~Wind+Temp+Solar.R,data = airquality)
+```
+
+Here is a table of regression coefficients.
+
+```{r showtable,results="asis"}
+library(xtable)
+xt<- xtable(summary(fit))
+print(xt,type="html")
+```
+
+
